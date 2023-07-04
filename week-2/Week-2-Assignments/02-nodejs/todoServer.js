@@ -41,9 +41,36 @@
  */
 const express = require('express');
 const bodyParser = require('body-parser');
-
 const app = express();
-
 app.use(bodyParser.json());
+var todo =[];
+
+app.get('/todos', (req, res) => {
+  res.send(200).json(todo);
+})
+
+app.post('/todos', (req, res) => {
+  var ID = Math. floor(Math. random() * 100);
+  var newtodo =[{
+    title : req.body.title,
+    completed : req.body.state,
+    description : req.body.description
+  }]
+  todo.push(newtodo);
+  res.send(201).json(newtodo);
+})
+
+
+
+
+
+
+
+
+
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
 
 module.exports = app;
