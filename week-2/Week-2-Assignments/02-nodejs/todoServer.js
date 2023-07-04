@@ -49,13 +49,20 @@ app.get('/todos', (req, res) => {
   res.send(200).json(todo);
 })
 
+app.get('/todos:ID', (req, res) => {
+  var ind = todo.forEach( if (req.query.ID == todo.ID){return todo.index}else{return null;}
+  var obj = todo(ind);
+  res.send(200).json(obj)
+})
+
 app.post('/todos', (req, res) => {
-  var ID = Math. floor(Math. random() * 100);
+  var IDs = Math. floor(Math. random() * 100);
   var newtodo =[{
+    ID : IDs
     title : req.body.title,
     completed : req.body.state,
     description : req.body.description
-  }]
+  }];
   todo.push(newtodo);
   res.send(201).json(newtodo);
 })
