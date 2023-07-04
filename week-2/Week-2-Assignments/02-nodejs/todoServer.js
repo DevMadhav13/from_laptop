@@ -50,9 +50,21 @@ app.get('/todos', (req, res) => {
 })
 
 app.get('/todos:ID', (req, res) => {
-  var ind = todo.forEach( if (req.query.ID == todo.ID){return todo.index}else{return null;}
-  var obj = todo(ind);
-  res.send(200).json(obj)
+  // var ind = todo.forEach( if (req.query.ID == todo.ID){return todo.index}else{return null;}
+  // var obj = todo(ind);
+  // res.send(200).json(obj)
+  function findindex(){
+  for (var i=0 ; i<todo.length; i++){
+    if (req.query.ID==todo[i].ID){
+      return i;
+     }
+    else{
+      return -1;
+    }}}
+  var indx = findindex(); 
+  console.log(indx);
+  res.send(201).json(todo[indx]);
+  
 })
 
 app.post('/todos', (req, res) => {
