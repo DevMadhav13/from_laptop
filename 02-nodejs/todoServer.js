@@ -43,7 +43,76 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-
 app.use(bodyParser.json());
 
-module.exports = app;
+var todo =[];
+
+app.get('/todos', (req, res) => {
+  res.json(todo);
+});
+
+app.get('/todos/:ID', (req, res) => {
+  var parid = parseInt(req.params.ID);
+  console.log(parid);
+
+     for (var i=0 ; i<todo.length; i++){
+      if (parid==todo[i].ID){
+        res.status(201).json(todo[i]);
+       }
+      else{
+        res.status(401);
+      }}}
+        
+);
+ 
+
+app.post('/todos', (req, res) => {
+  var IDs = Math. floor(Math. random() * 100);
+  var newtodo ={
+    ID : IDs,
+    title : req.body.title,
+    completed : req.body.completed,
+    description : req.body.description
+  };
+  todo.push(newtodo);
+  res.json(newtodo);
+})
+
+app.put('/todos/:ID', (req, res) => {
+  var parid = parseInt(req.params.ID);
+
+  for (var i=0 ; i<todo.length; i++){
+      if (parid==todo[i].ID){
+        var updatedtodo ={
+          ID : parid ,
+          title : req.body.title,
+          completed : req.body.completed,
+          description : req.body.description
+        };
+        todo[i]=(updatedtodo);
+        res.status(201).json(todo[i]);
+       }
+      else{
+        res.status(401);
+      }}})
+       ;
+
+app.delete('/todos/:ID', (req, res) => {
+var parid = parseInt(req.params.ID);
+console.log(parid);
+var updateddtodo =[];
+    for (var i=0 ; i<todo.length; i++)
+    {
+      if (parid==todo[i].ID){
+        res.status(201);
+        }
+      else{      
+        updateddtodo.push(todo[i]);
+        res.status(201);
+      }
+    }
+    todo=updateddtodo;
+  }   
+);
+
+app.listen(3000);
