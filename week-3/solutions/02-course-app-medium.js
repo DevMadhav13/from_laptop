@@ -25,9 +25,7 @@ const authenticateJwt = (req, res, next) => {
       if (err) {
         return res.sendStatus(403);
       }
-
-      req.user = user;
-      next();
+      
     });
   } else {
     res.sendStatus(401);
